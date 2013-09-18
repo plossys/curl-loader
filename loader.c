@@ -855,7 +855,34 @@ int setup_curl_handle_appl (client_context*const cctx, url_context* url)
             }
           else
             {
-              curl_easy_setopt(handle, CURLOPT_USERPWD, url->web_auth_credentials);
+              if ( ! strcmp(url->web_auth_credentials, "CREDENTIALS:RECORDS_FROM_FILE"))
+                {
+                  // TODO return -1;
+
+                  char web_userpwd[256];
+                  char *tmp = NULL;
+                  char *fix_form_str = "%s:%s";
+                  tmp = url->form_str;
+                  url->form_str= fix_form_str;
+
+                  if (init_client_formed_buffer (cctx, 
+                                                 url,
+                                                 web_userpwd,
+                                                 sizeof(web_userpwd)-1) == -1)
+                    {
+                      url->form_str= tmp;
+                      fprintf (stderr,
+                               "%s - error: init_client_formed_buffer() failed for BASIC auth fields.\n",
+                               __func__);
+                      return -1;
+                    }
+                  url->form_str= tmp;
+                  curl_easy_setopt(handle, CURLOPT_USERPWD, web_userpwd);
+                }
+              else
+                {
+                  curl_easy_setopt(handle, CURLOPT_USERPWD, url->web_auth_credentials);
+                }
             }
           curl_easy_setopt(handle, CURLOPT_HTTPAUTH, url->web_auth_method);
         }

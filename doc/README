@@ -1,3 +1,9 @@
+version 0.56.1, stable, September 18, 2013
+
+Stefan Scherer <scherer_stefan@icloud.com>
+Add-on to use BASIC auth with a bulk of user names and passwords from
+the credential file.
+
 version 0.56, stable, January 10, 2012, svn 589
  
 2006 - 2012 Copyright (C)
@@ -606,6 +612,9 @@ WEB_AUTH_METHOD to be configured from the "BASIC", "DIGEST", "GSS_NEGOTIATE",
 "NTLM" or "ANY". The configured method will be used for authentication on HTTP 
 401 response. When "ANY" is configured, libcurl will choose a method. To use 
 "GSS_NEGOTIATE" the libcurl should be re-compiled with support for GSS.
+"BASIC" could be used with FORM_RECORDS_FILE to load a bulk of user names and
+passwords from this file for BASIC authentication. See
+conf-examples/bulk-basic-auth.conf for and example for the usage.
 
 WEB_AUTH_CREDENTIALS to be provided in the form "user:password". If not 
 configured, the loader uses USERNAME and PASSWORD tags value to synthesize the 
