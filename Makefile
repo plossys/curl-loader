@@ -157,6 +157,7 @@ $(LIBCURL):
 	cd $(CURL_BUILD); ../../packages/curl/configure --prefix=$(CURL_BUILD) \
 	--without-libidn \
 	--without-libssh2 \
+	--without-librtmp \
 	--disable-ldap \
 	--disable-ipv6 \
         --enable-thread \
