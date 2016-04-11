@@ -14,4 +14,4 @@ deployment:
     branch: master
     commands:
       - docker login $DOCKERHUB_LOGIN
-      - docker push plossys/curlloader
+      - docker push plossys/curlloader:latest
