@@ -1,0 +1,13 @@
+dependencies:
+  pre:
+    - sudo apt-get -y install git build-essential libssl-dev
+    - mkdir obj
+    - make
+    - docker build -t plossys/curlloader .
+
+deployment:
+  publish:
+    branch: master
+    commands:
+      - docker login $DOCKERHUB_LOGIN
+      - docker push plossys/curlloader
