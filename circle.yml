@@ -13,5 +13,5 @@ deployment:
   publish:
     branch: master
     commands:
-      - docker login ${DOCKERHUB_CREDENTIALS}
+      - docker login -u ${DOCKERHUB_CREDENTIALS%%:*} -p ${DOCKERHUB_CREDENTIALS#*:}
       - docker push plossys/curlloader:latest
